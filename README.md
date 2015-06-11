@@ -19,51 +19,73 @@ Open `index.html` that is included in this repo for some examples of usage.
 ## Usage
 
 ```javascript
+// Let's notify ourselves whenever we add a new event handler to shortwave
+shortwave.on('add', notify);
+
+function notify(e, eventName) {
+    console.log(eventName + ' was added');
+}
+
+
 // You can store listeners in variables to remove them later
+// After you attach an event handler, you can call .once() to do something real quick
 var greet = shortwave.on('greet', function(e, data) {
-	console.log(e, data);
-});
+    console.log(data);
+}).once('add', 'greet');
 
 // But you don't have to store listeners in variables
 shortwave.on('greet', function(e, data) {
-	console.log('I still exist');
+    console.log('I\'m another handler, I still exist');
+}).once('add', 'greet');
+
+shortwave.emit('greet', {
+    greeting: 'hello'
 });
+// => { greeting: 'hello' }
+// => 'I'm another handler, I still exist'
 
 var adieu = shortwave.on('adieu', function(e, data) {
-	console.log(e, data);
-});
+    console.log(e, data);
+}).once('add', 'adieu');
 
 // You can check out all current event listeners and handlers
 /*
     {
-    	greet: Array[2], // 2 handlers
-    	adieu: Array[1]  // 1 handler
+        add:   Array[1], // 1 handler
+        greet: Array[2], // 2 handlers
+        adieu: Array[1]  // 1 handler
     }
 */
-console.log(shortwave.get());
+shortwave.get(get);
 
-shortwave.emit('greet', {
-	greeting: 'hello'
-});
-// => { greeting: 'hello' }
-// => 'I still exist'
+function get(events) {
+    console.log('Events', events);
+}
+
+// Or just the names of events
+shortwave.collect(collect);
+
+function collect(eventNames) {
+    console.log('Event names', eventNames);
+}
 
 // .block() returns true or false if the removal of the handler was successful
-shortwave.block(greet, function(remainingEvents) {
-	console.log('success :)', remainingEvents);
-}, function(remainingEvents) {
-	console.log('failure :(', remainingEvents);
-});
+shortwave.block(greet, success /*, failure */);
 
-// Let's see our updated events
+function success(remainingEvents) {
+    console.log('success :)', remainingEvents);
+}
+
+// Let's see our updated events (.get() doesn't always need a callback... we can just return the events)
 /*
     {
-    	greet: Array[1], // Only 1 handler now! Success!
-    	adieu: Array[1]  // 1 handler
+        add:   Array[1], // 1 handler
+        greet: Array[1], // Only 1 handler now! Success!
+        adieu: Array[1]  // 1 handler
     }
 */
 console.log(shortwave.get());
 
 shortwave.emit('greet');
-// => 'I still exist'
+// => 'I'm another handler, I still exist'
 ```
