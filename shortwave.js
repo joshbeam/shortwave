@@ -10,9 +10,9 @@
 		on: on
 	};
 
-	function block(info) {
+	function block(info, onSuccess, onFailure) {
 		var success = false;
-		
+
 		if(info.eventName in events) {
 			events[info.eventName].forEach(function(callback, i, arr) {
 				if(callback === info.callback) {
@@ -23,7 +23,13 @@
 			});
 		}
 
-		return success;
+		if(success && typeof onSuccess !== 'undefined') {
+			return onSuccess(events);
+		}
+
+		if(!success && typeof onFailure !== 'undefined') {
+			return onFailure(events);
+		}
 	}
 
 	function get() {
