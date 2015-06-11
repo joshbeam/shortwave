@@ -2,7 +2,9 @@
 
 Simple JavaScript implementation of the broadcast/receive or pub/sub method for sending and receiving events.
 
-It's similar to how you would use `$rootScope.$broadcast` and `$rootScope.$on` in AngularJS.
+It's similar to how you would use `$rootScope.$broadcast` and `$rootScope.$on` in <a href="https://angularjs.org/">AngularJS</a>.
+
+What can you use this repo for? <a href="https://facebook.github.io/react/">React</a>, for example.
 
 ## Install
 
@@ -16,7 +18,7 @@ Open `index.html` that is included in this repo for some examples of usage.
 
 ## Usage
 
-```
+```javascript
 // You can store listeners in variables to remove them later
 var greet = shortwave.on('greet', function(e, data) {
 	console.log(e, data);
