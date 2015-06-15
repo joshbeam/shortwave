@@ -1,3 +1,5 @@
+'use strict';
+
 class Shortwave {
 	constructor() {
 		this.events = {};
