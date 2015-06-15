@@ -2,6 +2,8 @@
   "name": "shortwave",
   "version": "1.0.0",
   "description": "pubsub",
+  "version": "0.0.1",
+  "description": "Simple JavaScript implementation of the broadcast/receive or pub/sub method for sending and receiving events.",
   "main": "shortwave.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +17,12 @@
   "bugs": {
     "url": "https://github.com/joshbeam/shortwave/issues"
   },
-  "homepage": "https://github.com/joshbeam/shortwave"
+  "homepage": "https://github.com/joshbeam/shortwave",
+  "devDependencies": {
+    "babelify": "^6.1.2",
+    "browserify": "^10.2.4",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.1.0",
+    "vinyl-source-stream": "^1.1.0"
+  }
 }
