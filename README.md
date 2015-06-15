@@ -9,7 +9,7 @@ What can you use this repo for? <a href="https://facebook.github.io/react/">Reac
 ## Install
 
 ```
-git clone https://github.com/joshbeam/shortwave.git
+npm install --save shortwave
 ```
 
 ## Usage
@@ -17,8 +17,6 @@ git clone https://github.com/joshbeam/shortwave.git
 You can use it with <a href="http://browserify.org/">Browserify</a> so that you can `require` it on the front-end.
 
 ```javascript
-var shortwave = require('shortwave');
-
 var HELLO = 'hello';
 
 var remove = shortwave.on(HELLO, sayHello);
@@ -26,6 +24,17 @@ var remove = shortwave.on(HELLO, sayHello);
 function sayHello() {
     console.log('Hello!');
 }
+
+shortwave.emit(HELLO);
+// => 'Hello!'
+
+var events = shortwave.get();
+console.log(events);
+/*
+ * {
+ *      hello: Array[1];
+ * }
+ */
 
 shortwave.remove(remove, success, failure);
 
@@ -35,5 +44,5 @@ function success(remainingEvents) {
 
 function failure(remainingEvents) {
     console.log('failure');
-}
+}       
 ```

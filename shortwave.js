@@ -3,26 +3,11 @@
 var _events = {};
 
 var shortwave = {
-	collect: collect,
 	get: get,
 	emit: emit,
 	on: on,
 	remove: remove
 };
-
-/**
- *	Returns a list of all named events (but not handlers)
- *	@return {Array}
- */
-function collect(callback) {
-	var eventNames = Object.keys(_events);
-
-	if(typeof callback !== 'undefined') {
-		return callback.call(this, eventNames);
-	}
-
-	return eventNames;
-}
 
 /**
  *	Returns the _events object (events and handlers)
