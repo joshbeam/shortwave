@@ -17,6 +17,8 @@ npm install --save shortwave
 You can use it with <a href="http://browserify.org/">Browserify</a> so that you can `require` it on the front-end.
 
 ```javascript
+var shortwave = require('shortwave');
+
 var HELLO = 'hello';
 
 var remove = shortwave.on(HELLO, sayHello);
