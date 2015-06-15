@@ -3,44 +3,12 @@
 var _events = {};
 
 var shortwave = {
-	block: block,
 	collect: collect,
 	get: get,
 	emit: emit,
-	on: on
+	on: on,
+	remove: remove
 };
-
-/**
- *	Removes a specific event handler from an array of event handlers
- *	@param {PlainObject} info (generated automatically as the return from shortwave.on())
- *	@param {Function} onSuccess
- *	@param {Function} onError
- *	@return {Function} onSuccess || onFailure
- */
-function remove(info, onSuccess, onFailure) {
-	var success = false;
-
-	if(info.eventName in _events) {
-		_events[info.eventName].forEach(function(callback, i, arr) {
-			if(callback === info.callback) {
-				// remove the function reference from the array
-				arr.splice(i, 1);
-				success = true;
-				return;
-			}
-		});
-	}
-
-	// do something if the function existed and was removed
-	if(success && typeof onSuccess !== 'undefined') {
-		return onSuccess(_events);
-	}
-
-	// do something if the function did *not* exist, and therefore could not be removed
-	if(!success && typeof onFailure !== 'undefined') {
-		return onFailure(_events);
-	}
-}
 
 /**
  *	Returns a list of all named events (but not handlers)
@@ -110,6 +78,38 @@ function on(eventName, _callback) {
 		eventName: eventName,
 		once: emit
 	};
+}
+
+/**
+ *	Removes a specific event handler from an array of event handlers
+ *	@param {PlainObject} info (generated automatically as the return from shortwave.on())
+ *	@param {Function} onSuccess
+ *	@param {Function} onError
+ *	@return {Function} onSuccess || onFailure
+ */
+function remove(info, onSuccess, onFailure) {
+	var success = false;
+
+	if(info.eventName in _events) {
+		_events[info.eventName].forEach(function(callback, i, arr) {
+			if(callback === info.callback) {
+				// remove the function reference from the array
+				arr.splice(i, 1);
+				success = true;
+				return;
+			}
+		});
+	}
+
+	// do something if the function existed and was removed
+	if(success && typeof onSuccess !== 'undefined') {
+		return onSuccess(_events);
+	}
+
+	// do something if the function did *not* exist, and therefore could not be removed
+	if(!success && typeof onFailure !== 'undefined') {
+		return onFailure(_events);
+	}
 }
 
 module.exports = shortwave;
