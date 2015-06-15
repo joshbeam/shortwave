@@ -1,0 +1,19 @@
+{
+  "name": "shortwave",
+  "version": "1.0.0",
+  "description": "pubsub",
+  "main": "shortwave.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joshbeam/shortwave.git"
+  },
+  "author": "Josh Beam",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joshbeam/shortwave/issues"
+  },
+  "homepage": "https://github.com/joshbeam/shortwave"
+}
