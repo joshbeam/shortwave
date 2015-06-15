@@ -75,8 +75,7 @@ function on(eventName, _callback) {
 	// return callback for removal if necessary
 	return {
 		callback: callback,
-		eventName: eventName,
-		once: emit
+		eventName: eventName
 	};
 }
 
