@@ -14,12 +14,12 @@ var gulp = require('gulp'),
 
 gulp.task('modules', function() {
 	browserify({
-		entries: 'src/scripts.js',
+		entries: 'src/shortwave.js',
 		debug: true
 	})
 	.transform(babelify)
 	.bundle()
-	.pipe(source('output.js'))
+	.pipe(source('shortwave.js'))
 	.pipe(gulp.dest('dist'));
 });
 
